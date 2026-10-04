@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Barbearia em Pirituba | Imperium Barber's — Degradê, Barba e Sinuca</title>
+<meta name="description" content="Barbearia em Pirituba | Imperium Barber's — Degradê, Barba e Sinuca. Corte na régua, barba na navalha, sinuca, fliperama, cerveja gelada e estacionamento próprio. Agende seu horário.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ext-resource-dependency" content="assets/salao2.jpg" data-resource-id="hero-salao2">
+<meta name="ext-resource-dependency" content="assets/sinuca-turma.jpg" data-resource-id="hero-sinuca-turma">
+<meta name="ext-resource-dependency" content="assets/sinuca-turma2.jpg" data-resource-id="hero-sinuca-turma2">
+<meta name="ext-resource-dependency" content="assets/mesa-baixa.jpg" data-resource-id="hero-mesa-baixa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Barlow:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,700;1,700;1,800&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#0E0E0E;color:#F4EFE6;font-family:'Barlow',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#C9A04E;text-decoration:none}
+a:hover{color:#F5D9A8}
+img{display:block}
+h1,h2,h3,figcaption{text-wrap:balance}
+p,blockquote,li{text-wrap:pretty}
+@keyframes polemove{from{background-position:0 0}to{background-position:56.57px 0}}
+@keyframes ballfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes ballspin{from{transform:translate(-7%,-9%) rotate(0deg)}to{transform:translate(-7%,-9%) rotate(360deg)}}
+@keyframes ballshine{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12)}}
+@keyframes flicker{0%,100%{opacity:1}45%{opacity:.95}50%{opacity:.45}55%{opacity:1}80%{opacity:.85}}
+</style>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" data-bg-color="#0E0E0E"><rect width="100" height="100" fill="#0E0E0E"/><circle cx="50" cy="50" r="20" fill="#C8102E"/><circle cx="50" cy="50" r="9" fill="#F4EFE6"/></svg></template>
+</helmet>
+
+<div style="background:#0E0E0E;color:#F4EFE6;overflow-x:hidden;">
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(14,14,14,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,160,78,.25);">
+  <div style="max-width:1280px;margin:0 auto;padding:10px clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:16px;">
+    <a href="#topo" style="display:flex;align-items:center;gap:10px;color:#F4EFE6;">
+      <img src="assets/logo-inv.png" alt="Imperium Barber's" style="height:{{ logoH }};width:auto;margin:-8px 0;">
+      <sc-if value="{{ showWordmark }}" hint-placeholder-val="{{ true }}"><span style="font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.24em;line-height:1;color:#C9A04E;white-space:nowrap;">BARBEARIA</span></sc-if>
+    </a>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:28px;font-weight:600;font-size:14px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;">
+        <a href="#experiencia" style="color:#F4EFE6;" style-hover="color:#C9A04E;">Experiência</a>
+        <a href="#servicos" style="color:#F4EFE6;" style-hover="color:#C9A04E;">Serviços</a>
+        <a href="#cortes" style="color:#F4EFE6;" style-hover="color:#C9A04E;">Cortes</a>
+        <a href="#equipe" style="color:#F4EFE6;" style-hover="color:#C9A04E;">Equipe</a>
+        <a href="#onde" style="color:#F4EFE6;" style-hover="color:#C9A04E;">Onde estamos</a>
+      </nav>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <sc-if value="{{ showHeaderCta }}" hint-placeholder-val="{{ true }}"><a href="{{ link }}" style="font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.08em;color:#F4EFE6;padding:12px 44px 12px 18px;background:linear-gradient(90deg,#C8102E calc(100% - 30px),#0E0E0E 0 calc(100% - 24px),#C8102E 0 calc(100% - 19px),#0E0E0E 0 calc(100% - 13px),#C8102E 0);white-space:nowrap;" style-hover="filter:brightness(1.12);color:#F4EFE6;">AGENDAR HORÁRIO</a></sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="Menu" style="width:46px;height:46px;background:transparent;border:1px solid rgba(201,160,78,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;padding:0;">
+          <span style="width:20px;height:2px;background:#F4EFE6;"></span>
+          <span style="width:20px;height:2px;background:#F4EFE6;"></span>
+          <span style="width:20px;height:2px;background:#F4EFE6;"></span>
+        </button>
+      </sc-if>
+    </div>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="display:flex;flex-direction:column;padding:8px 20px 24px;border-top:1px solid rgba(201,160,78,.25);font-family:'Anton',sans-serif;font-size:26px;letter-spacing:.04em;">
+      <a href="#experiencia" onClick="{{ closeMenu }}" style="color:#F4EFE6;padding:12px 0;border-bottom:1px solid #222;">EXPERIÊNCIA</a>
+      <a href="#servicos" onClick="{{ closeMenu }}" style="color:#F4EFE6;padding:12px 0;border-bottom:1px solid #222;">SERVIÇOS</a>
+      <a href="#cortes" onClick="{{ closeMenu }}" style="color:#F4EFE6;padding:12px 0;border-bottom:1px solid #222;">CORTES</a>
+      <a href="#equipe" onClick="{{ closeMenu }}" style="color:#F4EFE6;padding:12px 0;border-bottom:1px solid #222;">EQUIPE</a>
+      <a href="#onde" onClick="{{ closeMenu }}" style="color:#F4EFE6;padding:12px 0;">ONDE ESTAMOS</a>
+    </nav>
+  </sc-if>
+</header>
+
+<section id="topo" data-screen-label="Hero" style="position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:120px clamp(18px,5vw,64px) clamp(48px,8vw,96px);">
+  <img src="assets/salao2.jpg" ref="{{ heroRef }}" alt="Turma jogando sinuca na mesa-carro vermelha da Imperium Barber's" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:saturate(1.1) contrast(1.08) sepia(.12);">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,14,14,.93) 0%,rgba(14,14,14,.86) {{ heroShadeA }},rgba(14,14,14,0) {{ heroShadeB }}),linear-gradient(180deg,rgba(14,14,14,.5) 0,rgba(14,14,14,0) 120px,rgba(14,14,14,0) 88%,#0E0E0E 100%);"></div>
+  
+  <div style="position:relative;max-width:1280px;width:100%;margin:0 auto;">
+    <div data-hero-stagger="" style="max-width:600px;width:fit-content;">
+    <div style="display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 8px;border:1px solid #C9A04E;background:rgba(14,14,14,.7);margin-bottom:22px;">
+      <span aria-label="Google" style="display:inline-flex;align-items:center;padding:4px 10px;background:#FFFFFF;border-radius:999px;font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:-.01em;line-height:1.2;"><span style="color:#4285F4;">G</span><span style="color:#EA4335;">o</span><span style="color:#FBBC05;">o</span><span style="color:#4285F4;">g</span><span style="color:#34A853;">l</span><span style="color:#EA4335;">e</span></span>
+      <span style="font-family:'Anton',sans-serif;font-size:18px;letter-spacing:.02em;line-height:1;">4,8</span>
+      <span style="color:#FBBC04;font-size:15px;letter-spacing:2px;line-height:1;">★★★★★</span>
+    </div>
+    <h1 style="font-family:'Anton',sans-serif;font-weight:400;font-size:{{ h1Size }};line-height:.95;margin:0 0 16px;letter-spacing:.005em;text-transform:uppercase;white-space:nowrap;">Imperium Barber's<br><span style="color:#C9A04E;">em Pirituba -&nbsp;SP</span></h1>
+    <p style="font-family:'Anton',sans-serif;font-weight:400;font-size:{{ headSize }};line-height:1;margin:0;letter-spacing:.01em;text-wrap:balance;width:0;min-width:100%;">CORTE DE RESPEITO COM <span style="color:#C8102E;">RESENHA&nbsp;GARANTIDA.</span></p>
+    <p style="font-size:clamp(17px,1.6vw,20px);line-height:1.4;color:#E4DCCF;width:0;min-width:100%;margin:24px 0 22px;text-wrap:pretty;">Degradê na régua, barba na navalha e um ambiente que você não vai querer ir embora. Sinuca, fliperama, cerveja gelada e futebol na TV, tudo no mesmo lugar, em&nbsp;Pirituba.</p>
+    <div style="width:0;min-width:100%;display:flex;flex-wrap:wrap;gap:10px 22px;margin:0 0 30px;font-size:15px;font-weight:700;letter-spacing:.04em;color:#C9A04E;">
+      <span style="display:flex;align-items:center;gap:8px;"><span style="flex:none;width:18px;height:18px;background:#C9A04E;-webkit-mask:url(assets/icons/clock.svg) center/contain no-repeat;mask:url(assets/icons/clock.svg) center/contain no-repeat;"></span><span>Atendimento com hora&nbsp;marcada</span></span>
+      <span style="display:flex;align-items:center;gap:8px;"><span style="flex:none;width:18px;height:18px;background:#C9A04E;-webkit-mask:url(assets/icons/car.svg) center/contain no-repeat;mask:url(assets/icons/car.svg) center/contain no-repeat;"></span><span>Estacionamento&nbsp;próprio</span></span>
+    </div>
+    <div style="width:0;min-width:100%;display:flex;flex-wrap:wrap;gap:14px;">
+      <a href="https://wa.me/5511986306518" target="_blank" rel="noopener" style="font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.06em;color:#F4EFE6;padding:18px 58px 18px 28px;background:linear-gradient(90deg,#C8102E calc(100% - 38px),#0E0E0E 0 calc(100% - 30px),#C8102E 0 calc(100% - 24px),#0E0E0E 0 calc(100% - 16px),#C8102E 0);box-shadow:0 10px 30px rgba(200,16,46,.35);display:inline-flex;align-items:center;gap:10px;" style-hover="filter:brightness(1.12);color:#F4EFE6;"><span style="flex:none;width:22px;height:22px;background:currentColor;-webkit-mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;"></span><span>CHAMAR NO&nbsp;WHATSAPP</span></a>
+      <a href="#servicos" style="font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:#C9A04E;padding:18px 26px;border:1.5px solid #C9A04E;display:flex;align-items:center;gap:10px;" style-hover="background:#C9A04E;color:#0E0E0E;">Serviços</a>
+    </div>
+    </div>
+  </div>
+</section>
+
+<div aria-hidden="true" style="height:5px;opacity:.45;background:repeating-linear-gradient(-45deg,#C8102E 0 10px,#F4EFE6 10px 20px,#1E4FA8 20px 30px,#F4EFE6 30px 40px);background-size:56.57px 100%;animation:polemove 2.4s linear infinite;"></div>
+
+<section data-screen-label="Diferenciais" style="background:#0E0E0E;padding:36px clamp(18px,5vw,64px);border-bottom:1px solid #1E1E1E;">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:26px 16px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;"><span style="flex:none;width:30px;height:30px;background:#C9A04E;-webkit-mask:url(assets/icons/clock.svg) center/contain no-repeat;mask:url(assets/icons/clock.svg) center/contain no-repeat;"></span><span style="font-size:14px;font-weight:600;letter-spacing:.04em;text-wrap:balance;">Hora marcada, sem&nbsp;espera</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;"><span style="flex:none;width:30px;height:30px;background:#C9A04E;-webkit-mask:url(assets/icons/car.svg) center/contain no-repeat;mask:url(assets/icons/car.svg) center/contain no-repeat;"></span><span style="font-size:14px;font-weight:600;letter-spacing:.04em;text-wrap:balance;">Estacionamento&nbsp;próprio</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;"><span style="flex:none;width:30px;height:30px;background:#C9A04E;-webkit-mask:url(assets/icons/circle-dot.svg) center/contain no-repeat;mask:url(assets/icons/circle-dot.svg) center/contain no-repeat;"></span><span style="font-size:14px;font-weight:600;letter-spacing:.04em;text-wrap:balance;">Mesa de&nbsp;sinuca</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;"><span style="flex:none;width:30px;height:30px;background:#C9A04E;-webkit-mask:url(assets/icons/gamepad-2.svg) center/contain no-repeat;mask:url(assets/icons/gamepad-2.svg) center/contain no-repeat;"></span><span style="font-size:14px;font-weight:600;letter-spacing:.04em;text-wrap:balance;">Fliperama</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;"><span style="flex:none;width:30px;height:30px;background:#C9A04E;-webkit-mask:url(assets/icons/beer.svg) center/contain no-repeat;mask:url(assets/icons/beer.svg) center/contain no-repeat;"></span><span style="font-size:14px;font-weight:600;letter-spacing:.04em;text-wrap:balance;">Cerveja&nbsp;gelada</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;"><span style="flex:none;width:30px;height:30px;background:#C9A04E;-webkit-mask:url(assets/icons/tv.svg) center/contain no-repeat;mask:url(assets/icons/tv.svg) center/contain no-repeat;"></span><span style="font-size:14px;font-weight:600;letter-spacing:.04em;text-wrap:balance;">Futebol na&nbsp;TV</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;"><span style="flex:none;width:30px;height:30px;background:#C9A04E;-webkit-mask:url(assets/icons/snowflake.svg) center/contain no-repeat;mask:url(assets/icons/snowflake.svg) center/contain no-repeat;"></span><span style="font-size:14px;font-weight:600;letter-spacing:.04em;text-wrap:balance;">Ar-condicionado</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;"><span style="flex:none;width:30px;height:30px;background:#C9A04E;-webkit-mask:url(assets/icons/users.svg) center/contain no-repeat;mask:url(assets/icons/users.svg) center/contain no-repeat;"></span><span style="font-size:14px;font-weight:600;letter-spacing:.04em;text-wrap:balance;">Espaço&nbsp;família</span></div>
+  </div>
+</section>
+
+<section id="experiencia" data-screen-label="Experiência" style="scroll-margin-top:70px;position:relative;background-color:#151210;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32'%3E%3Cg fill='none' stroke='%23A0623F' stroke-opacity='.22'%3E%3Cpath d='M0 .5H64M0 16.5H64M.5 0V16M32.5 16V32'/%3E%3C/g%3E%3C/svg%3E&quot;);padding:0 0 clamp(64px,9vw,120px);">
+  <div style="display:flex;justify-content:space-between;padding:18px 4%;">
+    <sc-for list="{{ lamps }}" as="l" hint-placeholder-count="16"><span style="width:12px;height:12px;border-radius:50%;background:#F5D9A8;box-shadow:0 0 14px 4px rgba(245,217,168,.5);animation:flicker 5s ease-in-out {{ l.d }} infinite;"></span></sc-for>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(32px,5vw,64px) clamp(18px,5vw,64px) 0;">
+    <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5vw,72px);align-items:center;margin-bottom:clamp(40px,6vw,72px);">
+      <div>
+        <p style="font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:22px;color:#C9A04E;margin:0 0 14px;display:flex;align-items:center;gap:14px;"><span data-ball="" style="flex:none;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 27% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.6) 5%,rgba(255,255,255,0) 14%),radial-gradient(circle at 72% 88%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 26%),radial-gradient(circle at 36% 30%,color-mix(in oklab,#E8B10F 72%,white) 0%,#E8B10F 42%,color-mix(in oklab,#E8B10F 45%,black) 88%,color-mix(in oklab,#E8B10F 30%,black) 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 -1px 3px rgba(0,0,0,.35),0 4px 5px -1px rgba(0,0,0,.65),0 1px 2px rgba(0,0,0,.45);position:relative;"><span style="width:23px;height:23px;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFFFFF 0,#F4EFE6 55%,#D9D1C3 100%);box-shadow:inset 0 -1px 2px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-7%,-9%);color:#0E0E0E;font-family:'Barlow',sans-serif;font-style:normal;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;">1</span></span><span>Não é só uma barbearia</span></p>
+        <h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(40px,6vw,76px);line-height:.95;margin:0 0 24px;text-wrap:balance;">AQUI NINGUÉM FICA SÓ&nbsp;ESPERANDO.</h2>
+        <p style="font-size:18px;line-height:1.65;color:#D8CFC2;margin:0;max-width:560px;text-wrap:pretty;">Esquece a cadeira de plástico e o celular na mão até chamarem seu nome. Na Imperium você joga uma partida na mesa-carro, encara um fliperama, pega uma gelada no balcão ou acompanha o jogo do seu time. Quando percebe, já é sua vez, e você nem queria ir&nbsp;embora.</p>
+      </div>
+      <div style="justify-self:center;width:min(100%,340px);aspect-ratio:9/16;border:1px solid rgba(201,160,78,.5);padding:8px;background:#0E0E0E;box-shadow:0 30px 60px rgba(0,0,0,.5);">
+        <img src="assets/bar.jpg" alt="Balcão do bar com bebidas sobre tijolinho" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+    <div data-reveal="" style="display:grid;grid-template-columns:{{ mosaicCols }};grid-auto-rows:{{ mosaicRow }};gap:10px;">
+      <figure style="grid-column:span 2;grid-row:span 2;margin:0;position:relative;overflow:hidden;">
+        <img src="assets/sinuca-turma2.jpg" alt="Clientes jogando sinuca na mesa-carro" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .6s;" style-hover="transform:scale(1.05);">
+        <figcaption style="position:absolute;left:0;bottom:0;right:0;padding:40px 18px 16px;background:linear-gradient(transparent,rgba(14,14,14,.9));font-family:'Anton',sans-serif;font-size:clamp(18px,2vw,26px);letter-spacing:.02em;pointer-events:none;">A mesa mais famosa de&nbsp;Pirituba</figcaption>
+      </figure>
+      <figure style="grid-column:span 2;margin:0;position:relative;overflow:hidden;">
+        <img src="assets/fliperama.jpg" alt="Fliperama multijogos" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .6s;" style-hover="transform:scale(1.05);">
+        <figcaption style="position:absolute;left:0;bottom:0;right:0;padding:40px 18px 16px;background:linear-gradient(transparent,rgba(14,14,14,.9));font-family:'Anton',sans-serif;font-size:clamp(16px,1.6vw,22px);letter-spacing:.02em;pointer-events:none;">Fliperama pra voltar no&nbsp;tempo</figcaption>
+      </figure>
+      <figure style="margin:0;position:relative;overflow:hidden;">
+        <img src="assets/sinuca-turma.jpg" alt="Turma jogando sinuca na mesa-carro" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .6s;" style-hover="transform:scale(1.05);">
+        <figcaption style="position:absolute;left:0;bottom:0;right:0;padding:40px 14px 14px;background:linear-gradient(transparent,rgba(14,14,14,.9));font-family:'Anton',sans-serif;font-size:clamp(15px,1.4vw,19px);letter-spacing:.02em;pointer-events:none;">Uma partida enquanto&nbsp;espera</figcaption>
+      </figure>
+      <figure style="margin:0;position:relative;overflow:hidden;">
+        <img src="assets/marshall.jpg" alt="Sofás de couro, amplificadores e mesa-carro" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .6s;" style-hover="transform:scale(1.05);">
+        <figcaption style="position:absolute;left:0;bottom:0;right:0;padding:40px 14px 14px;background:linear-gradient(transparent,rgba(14,14,14,.9));font-family:'Anton',sans-serif;font-size:clamp(15px,1.4vw,19px);letter-spacing:.02em;pointer-events:none;">Sofá, rock e&nbsp;resenha</figcaption>
+      </figure>
+    </div>
+    <blockquote data-reveal="" style="margin:clamp(36px,5vw,56px) auto 0;max-width:760px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;">
+      <span style="display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:inherit;"><span style="color:#FBBC04;font-size:20px;letter-spacing:3px;">★★★★★</span><span aria-label="Google" style="display:inline-flex;align-items:center;padding:4px 11px;background:#FFFFFF;border-radius:999px;font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:-.01em;line-height:1.2;"><span style="color:#4285F4;">G</span><span style="color:#EA4335;">o</span><span style="color:#FBBC05;">o</span><span style="color:#4285F4;">g</span><span style="color:#34A853;">l</span><span style="color:#EA4335;">e</span></span></span>
+      <p style="margin:0;font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.3;color:#F4EFE6;">“Excelente ambiente e bom&nbsp;profissional.”</p>
+      <cite style="font-style:normal;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#BFB6A8;">— Liandro Cruz,&nbsp;Google</cite>
+    </blockquote>
+  </div>
+</section>
+
+<div aria-hidden="true" style="height:22px;background:linear-gradient(180deg,#1E1E1E,#0A0A0A);border-top:1px solid #2A2A2A;border-bottom:1px solid rgba(201,160,78,.3);display:flex;align-items:center;justify-content:space-evenly;padding:0 6%;"><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span></div>
+<section data-screen-label="Pra quem é" style="background-color:#121313;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);padding:clamp(64px,9vw,120px) clamp(18px,5vw,64px);">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,5vw,64px);align-items:stretch;">
+    <div data-reveal="" style="position:relative;min-height:380px;overflow:hidden;">
+      <img src="assets/mesa-barbeiros.jpg" alt="Mesa de sinuca com barbeiros trabalhando ao fundo" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.06) sepia(.08);">
+      <div style="position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(201,160,78,.4);"></div>
+    </div>
+    <div data-reveal="">
+      <p style="font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:22px;color:#C9A04E;margin:0 0 14px;display:flex;align-items:center;gap:14px;"><span data-ball="" style="flex:none;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 27% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.6) 5%,rgba(255,255,255,0) 14%),radial-gradient(circle at 72% 88%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 26%),radial-gradient(circle at 36% 30%,color-mix(in oklab,#1E4FA8 72%,white) 0%,#1E4FA8 42%,color-mix(in oklab,#1E4FA8 45%,black) 88%,color-mix(in oklab,#1E4FA8 30%,black) 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 -1px 3px rgba(0,0,0,.35),0 4px 5px -1px rgba(0,0,0,.65),0 1px 2px rgba(0,0,0,.45);position:relative;"><span style="width:23px;height:23px;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFFFFF 0,#F4EFE6 55%,#D9D1C3 100%);box-shadow:inset 0 -1px 2px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-7%,-9%);color:#0E0E0E;font-family:'Barlow',sans-serif;font-style:normal;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;">2</span></span><span>Pra quem é a Imperium</span></p>
+      <h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(38px,5.4vw,68px);line-height:.95;margin:0 0 32px;text-wrap:balance;">SE VOCÊ SE ENXERGOU AQUI, JÁ É DA&nbsp;CASA.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;">
+        <div style="padding:22px;background:#1A1A1A;border-top:3px solid #C8102E;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:24px;margin:0 0 8px;letter-spacing:.01em;">O cara do degradê na&nbsp;régua</h3>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Você sabe exatamente o fade que quer e não aceita marcação. Aqui a transição sai limpa, do jeito que você&nbsp;pediu.</p>
+        </div>
+        <div style="padding:22px;background:#1A1A1A;border-top:3px solid #C8102E;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:24px;margin:0 0 8px;letter-spacing:.01em;">O pai que traz o&nbsp;filho</h3>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Corte infantil com estilo, desenho se ele quiser, num ambiente tranquilo pra família inteira. Prepare-se: ele vai pedir pra&nbsp;voltar.</p>
+          <div style="margin:14px 0 8px;padding-top:12px;border-top:1px solid #2A2A2A;display:flex;align-items:center;gap:10px;"><span style="color:#FBBC04;font-size:14px;letter-spacing:2px;">★★★★★</span><span aria-label="Google" style="display:inline-flex;align-items:center;padding:4px 11px;background:#FFFFFF;border-radius:999px;font-family:Arial,sans-serif;font-weight:700;font-size:12px;letter-spacing:-.01em;line-height:1.2;"><span style="color:#4285F4;">G</span><span style="color:#EA4335;">o</span><span style="color:#FBBC05;">o</span><span style="color:#4285F4;">g</span><span style="color:#34A853;">l</span><span style="color:#EA4335;">e</span></span></div>
+          <p style="margin:0;font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:16px;line-height:1.4;color:#C9A04E;">“Meu filho só gosta de cortar&nbsp;lá.” <span style="font-family:'Barlow',sans-serif;font-style:normal;font-weight:600;font-size:13px;color:#BFB6A8;">— Sarah&nbsp;Guimaraes</span></p>
+        </div>
+        <div style="padding:22px;background:#1A1A1A;border-top:3px solid #C8102E;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:24px;margin:0 0 8px;letter-spacing:.01em;">O barbudo de&nbsp;respeito</h3>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Barba preta ou grisalha, cheia ou curta. Desenho na navalha, toalha quente e o cuidado que ela&nbsp;merece.</p>
+        </div>
+        <div style="padding:22px;background:#1A1A1A;border-top:3px solid #C8102E;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:24px;margin:0 0 8px;letter-spacing:.01em;">A turma da&nbsp;resenha</h3>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Marca com os amigos, corta, joga uma sinuca e sai renovado. Aqui barbearia virou&nbsp;programa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicos" data-screen-label="Serviços" style="scroll-margin-top:70px;background-color:#151210;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32'%3E%3Cg fill='none' stroke='%23A0623F' stroke-opacity='.16'%3E%3Cpath d='M0 .5H64M0 16.5H64M.5 0V16M32.5 16V32'/%3E%3C/g%3E%3C/svg%3E&quot;);padding:clamp(64px,9vw,120px) clamp(18px,5vw,64px);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal="" style="text-align:center;max-width:760px;margin:0 auto clamp(36px,5vw,56px);">
+      <p style="font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:22px;color:#C9A04E;margin:0 0 14px;display:flex;align-items:center;gap:14px;justify-content:center;"><span data-ball="" style="flex:none;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 27% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.6) 5%,rgba(255,255,255,0) 14%),radial-gradient(circle at 72% 88%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 26%),radial-gradient(circle at 36% 30%,color-mix(in oklab,#C8102E 72%,white) 0%,#C8102E 42%,color-mix(in oklab,#C8102E 45%,black) 88%,color-mix(in oklab,#C8102E 30%,black) 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 -1px 3px rgba(0,0,0,.35),0 4px 5px -1px rgba(0,0,0,.65),0 1px 2px rgba(0,0,0,.45);position:relative;"><span style="width:23px;height:23px;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFFFFF 0,#F4EFE6 55%,#D9D1C3 100%);box-shadow:inset 0 -1px 2px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-7%,-9%);color:#0E0E0E;font-family:'Barlow',sans-serif;font-style:normal;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;">3</span></span><span>Serviços</span></p>
+      <h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(40px,6vw,76px);line-height:.95;margin:0 0 16px;text-wrap:balance;">PRECISÃO EM CADA&nbsp;DETALHE.</h2>
+      <p style="font-size:18px;color:#D8CFC2;margin:0;">Do social ao freestyle, você sai daqui do jeito que imaginou. Ou&nbsp;melhor.</p>
+    </div>
+    <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:14px;">
+      <div style="padding:28px 24px;background:#0E0E0E;border:1px solid rgba(201,160,78,.45);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);border-color:#C9A04E;">
+        <span style="display:block;width:34px;height:34px;margin-bottom:18px;background:#C9A04E;-webkit-mask:url(assets/icons/scissors.svg) center/contain no-repeat;mask:url(assets/icons/scissors.svg) center/contain no-repeat;"></span>
+        <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:26px;margin:0 0 8px;">CORTE&nbsp;MASCULINO</h3>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Social ou moderno, pensado pro seu rosto e pro seu estilo. Nada de corte&nbsp;padrão.</p>
+      </div>
+      <div style="padding:28px 24px;background:#0E0E0E;border:1px solid rgba(201,160,78,.45);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);border-color:#C9A04E;">
+        <span style="display:block;width:34px;height:34px;margin-bottom:18px;background:#C9A04E;-webkit-mask:url(assets/icons/blend.svg) center/contain no-repeat;mask:url(assets/icons/blend.svg) center/contain no-repeat;"></span>
+        <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:26px;margin:0 0 8px;">DEGRADÊ /&nbsp;FADE</h3>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Transição na régua, sem marcação e com acabamento limpo de ponta a&nbsp;ponta.</p>
+      </div>
+      <div style="padding:28px 24px;background:#0E0E0E;border:1px solid rgba(201,160,78,.45);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);border-color:#C9A04E;">
+        <span style="display:block;width:34px;height:34px;margin-bottom:18px;background:#C9A04E;-webkit-mask:url(assets/icons/flame.svg) center/contain no-repeat;mask:url(assets/icons/flame.svg) center/contain no-repeat;"></span>
+        <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:26px;margin:0 0 8px;">BARBA NA&nbsp;NAVALHA</h3>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Toalha quente, desenho preciso e finalização que deixa o rosto&nbsp;alinhado.</p>
+      </div>
+      <div style="position:relative;padding:28px 24px;background:#1A1A1A;border:1.5px solid #C8102E;box-shadow:0 0 0 1px rgba(200,16,46,.25),0 20px 40px rgba(200,16,46,.15);">
+        <span style="position:absolute;top:-13px;right:18px;font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.1em;color:#F4EFE6;padding:5px 34px 5px 12px;background:linear-gradient(90deg,#C8102E calc(100% - 24px),#0E0E0E 0 calc(100% - 19px),#C8102E 0 calc(100% - 15px),#0E0E0E 0 calc(100% - 10px),#C8102E 0);">O MAIS PEDIDO</span>
+        <span style="display:block;width:34px;height:34px;margin-bottom:18px;background:#C9A04E;-webkit-mask:url(assets/icons/crown.svg) center/contain no-repeat;mask:url(assets/icons/crown.svg) center/contain no-repeat;"></span>
+        <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:26px;margin:0 0 8px;">CORTE +&nbsp;BARBA</h3>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">O visual completo numa sessão só. Você sai pronto pra qualquer&nbsp;compromisso.</p>
+      </div>
+      <div style="padding:28px 24px;background:#0E0E0E;border:1px solid rgba(201,160,78,.45);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);border-color:#C9A04E;">
+        <span style="display:block;width:34px;height:34px;margin-bottom:18px;background:#C9A04E;-webkit-mask:url(assets/icons/baby.svg) center/contain no-repeat;mask:url(assets/icons/baby.svg) center/contain no-repeat;"></span>
+        <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:26px;margin:0 0 8px;">CORTE&nbsp;INFANTIL</h3>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Paciência, estilo e um ambiente que a criançada&nbsp;adora.</p>
+      </div>
+      <div style="padding:28px 24px;background:#0E0E0E;border:1px solid rgba(201,160,78,.45);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);border-color:#C9A04E;">
+        <span style="display:block;width:34px;height:34px;margin-bottom:18px;background:#C9A04E;-webkit-mask:url(assets/icons/pen-tool.svg) center/contain no-repeat;mask:url(assets/icons/pen-tool.svg) center/contain no-repeat;"></span>
+        <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:26px;margin:0 0 8px;">DESENHO /&nbsp;RISQUINHO</h3>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">O detalhe que faz todo mundo perguntar onde você&nbsp;cortou.</p>
+      </div>
+      <div style="padding:28px 24px;background:#0E0E0E;border:1px solid rgba(201,160,78,.45);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);border-color:#C9A04E;">
+        <span style="display:block;width:34px;height:34px;margin-bottom:18px;background:#C9A04E;-webkit-mask:url(assets/icons/eye.svg) center/contain no-repeat;mask:url(assets/icons/eye.svg) center/contain no-repeat;"></span>
+        <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:26px;margin:0 0 8px;">SOBRANCELHA</h3>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Alinhamento discreto que fecha o visual sem&nbsp;exagero.</p>
+      </div>
+      <div style="position:relative;min-height:220px;overflow:hidden;border:1px solid rgba(201,160,78,.45);">
+        <img src="assets/barbeiro-toalha.jpg" alt="Barbeiro aplicando toalha quente no cliente" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+      </div>
+    </div>
+    <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:44px;text-align:center;">
+      <a href="{{ link }}" style="font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.06em;color:#F4EFE6;padding:18px 58px 18px 28px;background:linear-gradient(90deg,#C8102E calc(100% - 38px),#0E0E0E 0 calc(100% - 30px),#C8102E 0 calc(100% - 24px),#0E0E0E 0 calc(100% - 16px),#C8102E 0);" style-hover="filter:brightness(1.12);color:#F4EFE6;">VER VALORES E AGENDAR&nbsp;→</a>
+      <p style="margin:0;font-size:14px;color:#BFB6A8;max-width:440px;">Valores e horários disponíveis na plataforma de agendamento. É rápido e direto pelo&nbsp;celular.</p>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Primeira vez" style="background:#0E0E0E;padding:clamp(64px,8vw,104px) clamp(18px,5vw,64px);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <h2 data-reveal="" style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(38px,5.4vw,68px);line-height:.95;margin:0 auto 44px;text-align:center;max-width:16ch;">PRIMEIRA VEZ AQUI?&nbsp;RELAXA.</h2>
+    <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;">
+      <div style="padding:30px 26px;background:#1A1A1A;border:1px solid rgba(201,160,78,.35);display:flex;flex-direction:column;gap:12px;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);border-color:#C9A04E;">
+        <span style="flex:none;width:34px;height:34px;background:#C9A04E;-webkit-mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;"></span>
+        <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:26px;margin:6px 0 0;letter-spacing:.01em;">Você fala, a gente&nbsp;escuta</h3>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Antes de pegar na máquina, o barbeiro entende o que você quer e dá a real sobre o que funciona no seu&nbsp;cabelo.</p>
+      </div>
+      <div style="padding:30px 26px;background:#1A1A1A;border:1px solid rgba(201,160,78,.35);display:flex;flex-direction:column;gap:12px;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);border-color:#C9A04E;">
+        <span style="flex:none;width:34px;height:34px;background:#C9A04E;-webkit-mask:url(assets/icons/clock.svg) center/contain no-repeat;mask:url(assets/icons/clock.svg) center/contain no-repeat;"></span>
+        <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:26px;margin:6px 0 0;letter-spacing:.01em;">Hora marcada de&nbsp;verdade</h3>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Agendou, foi atendido. Seu tempo é&nbsp;respeitado.</p>
+      </div>
+      <div style="padding:30px 26px;background:#1A1A1A;border:1px solid rgba(201,160,78,.35);display:flex;flex-direction:column;gap:12px;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);border-color:#C9A04E;">
+        <span style="flex:none;width:34px;height:34px;background:#C9A04E;-webkit-mask:url(assets/icons/car.svg) center/contain no-repeat;mask:url(assets/icons/car.svg) center/contain no-repeat;"></span>
+        <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:26px;margin:6px 0 0;letter-spacing:.01em;">Chegou,&nbsp;estacionou</h3>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#CFC6B8;">Estacionamento próprio na frente da barbearia. Nada de rodar o&nbsp;quarteirão.</p>
+      </div>
+    </div>
+    <blockquote data-reveal="" style="margin:clamp(36px,5vw,56px) auto 0;max-width:760px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;">
+      <span style="display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:inherit;"><span style="color:#FBBC04;font-size:20px;letter-spacing:3px;">★★★★★</span><span aria-label="Google" style="display:inline-flex;align-items:center;padding:4px 11px;background:#FFFFFF;border-radius:999px;font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:-.01em;line-height:1.2;"><span style="color:#4285F4;">G</span><span style="color:#EA4335;">o</span><span style="color:#FBBC05;">o</span><span style="color:#4285F4;">g</span><span style="color:#34A853;">l</span><span style="color:#EA4335;">e</span></span></span>
+      <p style="margin:0;font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.3;color:#F4EFE6;">“Sabe escutar as preferências dos clientes e oferece sugestões com base na sua&nbsp;experiência.”</p>
+      <cite style="font-style:normal;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#BFB6A8;">— Rony Eduardo,&nbsp;Google</cite>
+    </blockquote>
+  </div>
+</section>
+<div aria-hidden="true" style="height:22px;background:linear-gradient(180deg,#1E1E1E,#0A0A0A);border-top:1px solid #2A2A2A;border-bottom:1px solid rgba(201,160,78,.3);display:flex;align-items:center;justify-content:space-evenly;padding:0 6%;"><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span></div>
+<section id="cortes" data-screen-label="Portfólio" style="scroll-margin-top:70px;background-color:#121313;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);padding:clamp(64px,9vw,120px) clamp(18px,5vw,64px);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:36px;">
+      <div>
+        <p style="font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:22px;color:#C9A04E;margin:0 0 14px;display:flex;align-items:center;gap:14px;"><span data-ball="" style="flex:none;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 27% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.6) 5%,rgba(255,255,255,0) 14%),radial-gradient(circle at 72% 88%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 26%),radial-gradient(circle at 36% 30%,color-mix(in oklab,#5B2A86 72%,white) 0%,#5B2A86 42%,color-mix(in oklab,#5B2A86 45%,black) 88%,color-mix(in oklab,#5B2A86 30%,black) 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 -1px 3px rgba(0,0,0,.35),0 4px 5px -1px rgba(0,0,0,.65),0 1px 2px rgba(0,0,0,.45);position:relative;"><span style="width:23px;height:23px;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFFFFF 0,#F4EFE6 55%,#D9D1C3 100%);box-shadow:inset 0 -1px 2px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-7%,-9%);color:#0E0E0E;font-family:'Barlow',sans-serif;font-style:normal;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;">4</span></span><span>Cortes</span></p>
+        <h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(40px,6vw,76px);line-height:.95;margin:0 0 14px;max-width:14ch;">CORTES QUE SAEM DAQUI TODO&nbsp;DIA.</h2>
+        <p style="margin:0;font-size:18px;line-height:1.55;color:#D8CFC2;max-width:520px;">Nada de foto de banco de imagem. É cliente real, na nossa&nbsp;cadeira.</p>
+      </div>
+      <a href="https://instagram.com/imperiumbarbers1" target="_blank" rel="noopener" style="display:inline-block;font-weight:700;font-size:16px;letter-spacing:.04em;color:#C9A04E;border-bottom:1.5px solid #C9A04E;padding:12px 0 6px;">Ver mais cortes no Instagram →&nbsp;@imperiumbarbers1</a>
+    </div>
+    <div data-reveal="" style="display:grid;grid-template-columns:{{ mosaicCols }};grid-auto-rows:{{ portfolioRow }};gap:10px;">
+      <figure style="grid-column:span 2;grid-row:span 2;margin:0;position:relative;overflow:hidden;background:#1A1A1A;">
+        <img src="assets/corte-risca.jpg" alt="Degradê com risca lateral" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .6s;" style-hover="transform:scale(1.07);">
+        <figcaption style="position:absolute;left:12px;bottom:12px;padding:6px 12px;background:#0E0E0E;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;pointer-events:none;">Degradê com&nbsp;risca</figcaption>
+      </figure>
+      <figure style="margin:0;position:relative;overflow:hidden;background:#1A1A1A;">
+        <img src="assets/fade-infantil.jpg" alt="Fade infantil com desenho" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .6s;" style-hover="transform:scale(1.07);">
+        <figcaption style="position:absolute;left:10px;bottom:10px;padding:5px 10px;background:#0E0E0E;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;pointer-events:none;">Fade infantil com&nbsp;desenho</figcaption>
+      </figure>
+      <figure style="margin:0;position:relative;overflow:hidden;background:#1A1A1A;">
+        <img src="assets/barba-desenhada.jpg" alt="Barba desenhada" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .6s;" style-hover="transform:scale(1.07);">
+        <figcaption style="position:absolute;left:10px;bottom:10px;padding:5px 10px;background:#0E0E0E;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;pointer-events:none;">Barba&nbsp;desenhada</figcaption>
+      </figure>
+      <figure style="margin:0;position:relative;overflow:hidden;background:#1A1A1A;">
+        <img src="assets/barba-grisalha.jpg" alt="Barba grisalha alinhada" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;transition:transform .6s;" style-hover="transform:scale(1.07);">
+        <figcaption style="position:absolute;left:10px;bottom:10px;padding:5px 10px;background:#0E0E0E;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;pointer-events:none;">Barba grisalha&nbsp;alinhada</figcaption>
+      </figure>
+      <figure style="margin:0;position:relative;overflow:hidden;background:#1A1A1A;">
+        <img src="assets/toalha-xadrez.jpg" alt="Cliente com toalha quente e capa xadrez" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .6s;" style-hover="transform:scale(1.07);">
+        <figcaption style="position:absolute;left:10px;bottom:10px;padding:5px 10px;background:#0E0E0E;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;pointer-events:none;">Toalha&nbsp;quente</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="equipe" data-screen-label="Equipe" style="scroll-margin-top:70px;background:#0E0E0E;padding:0 0 clamp(64px,9vw,120px);">
+  <div style="position:relative;height:clamp(300px,48vw,620px);overflow:hidden;">
+    <img src="assets/salao.jpg" alt="Salão com barbeiros uniformizados atendendo" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.06) sepia(.1);">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0E0E0E 0%,transparent 22%,transparent 55%,#0E0E0E 100%);"></div>
+  </div>
+  <div style="max-width:1280px;margin:-80px auto 0;padding:0 clamp(18px,5vw,64px);position:relative;">
+    <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:40px;">
+      <div>
+        <p style="font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:22px;color:#C9A04E;margin:0 0 14px;display:flex;align-items:center;gap:14px;"><span data-ball="" style="flex:none;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 27% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.6) 5%,rgba(255,255,255,0) 14%),radial-gradient(circle at 72% 88%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 26%),radial-gradient(circle at 36% 30%,color-mix(in oklab,#E0631A 72%,white) 0%,#E0631A 42%,color-mix(in oklab,#E0631A 45%,black) 88%,color-mix(in oklab,#E0631A 30%,black) 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 -1px 3px rgba(0,0,0,.35),0 4px 5px -1px rgba(0,0,0,.65),0 1px 2px rgba(0,0,0,.45);position:relative;"><span style="width:23px;height:23px;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFFFFF 0,#F4EFE6 55%,#D9D1C3 100%);box-shadow:inset 0 -1px 2px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-7%,-9%);color:#0E0E0E;font-family:'Barlow',sans-serif;font-style:normal;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;">5</span></span><span>Equipe</span></p>
+        <h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(40px,6vw,76px);line-height:.95;margin:0;max-width:12ch;">QUEM SEGURA A&nbsp;MÁQUINA.</h2>
+      </div>
+      <p style="font-size:18px;line-height:1.65;color:#D8CFC2;margin:0;text-wrap:pretty;">Cliente não volta por acaso. Nossos barbeiros escutam, sugerem e entregam com capricho, do corte social ao freestyle, do primeiro corte do seu filho à sua barba&nbsp;grisalha.</p>
+    </div>
+    <figure data-reveal="" style="margin:0;position:relative;padding:clamp(32px,5vw,56px) clamp(24px,5vw,64px);background:#1A1A1A;border:1px solid rgba(201,160,78,.45);display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(16px,3vw,36px);align-items:start;">
+      <span aria-hidden="true" style="font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(90px,12vw,160px);line-height:.7;color:#C9A04E;">“</span>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;"><span style="color:#FBBC04;font-size:22px;letter-spacing:3px;">★★★★★</span><span style="display:inline-flex;align-items:center;gap:8px;padding:5px 12px;background:#FFFFFF;border-radius:999px;font-family:Arial,sans-serif;font-weight:700;font-size:14px;"><span><span style="color:#4285F4;">G</span><span style="color:#EA4335;">o</span><span style="color:#FBBC05;">o</span><span style="color:#4285F4;">g</span><span style="color:#34A853;">l</span><span style="color:#EA4335;">e</span></span></span></div>
+        <blockquote style="margin:0;font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(24px,3vw,40px);line-height:1.25;color:#F4EFE6;">Em minha opinião, a melhor do bairro. Ambiente agradável, profissionais de alto&nbsp;nível.</blockquote>
+        <figcaption style="font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#BFB6A8;">— Fabiano, Local Guide no&nbsp;Google</figcaption>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section data-screen-label="Depoimentos" style="background:linear-gradient(180deg,#0E0E0E 0 14px,#C8102E 14px 22px,#0E0E0E 22px 36px,#C8102E 36px calc(100% - 36px),#0E0E0E calc(100% - 36px) calc(100% - 22px),#C8102E calc(100% - 22px) calc(100% - 14px),#0E0E0E calc(100% - 14px));padding:clamp(64px,9vw,112px) clamp(18px,5vw,64px);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:36px;">
+      <div><h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(38px,5.6vw,72px);line-height:.95;margin:0;max-width:16ch;text-wrap:balance;">QUEM VEM,&nbsp;VOLTA.</h2>
+        <p style="margin:18px 0 0;font-size:clamp(18px,1.6vw,21px);line-height:1.45;font-weight:500;color:#FFFFFF;max-width:440px;">Quem senta na nossa cadeira volta, e ainda traz os&nbsp;amigos.</p></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 18px 10px 12px;background:#0E0E0E;border:1px solid #C9A04E;">
+        <span style="width:28px;height:32px;background:#C9A04E;clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%);display:flex;align-items:center;justify-content:center;color:#0E0E0E;font-size:14px;padding-bottom:6px;">★</span>
+        <span style="font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;">Avaliações reais do&nbsp;Google</span>
+      </div>
+    </div>
+    <div data-reveal="">
+      <div ref="{{ trackRef }}" style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:4px 2px 8px;">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+          <article style="flex:0 0 {{ cardBasis }};height:300px;scroll-snap-align:start;background:#FFFFFF;color:#202124;border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 12px 30px rgba(0,0,0,.3);font-family:Roboto,Arial,sans-serif;transition:transform .35s ease,box-shadow .35s ease;" style-hover="transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4);">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="flex:none;width:40px;height:40px;border-radius:50%;background:{{ r.cor }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;">{{ r.ini }}</span>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:15px;font-weight:500;color:#202124;">{{ r.nome }}</div>
+              </div>
+              <span aria-label="Google" style="flex:none;font-family:Arial,sans-serif;font-weight:700;font-size:15px;letter-spacing:-.02em;"><span style="color:#4285F4;">G</span><span style="color:#EA4335;">o</span><span style="color:#FBBC05;">o</span><span style="color:#4285F4;">g</span><span style="color:#34A853;">l</span><span style="color:#EA4335;">e</span></span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="color:#FBBC04;font-size:17px;letter-spacing:1px;">★★★★★</span>
+              <span style="font-size:12px;color:#5F6368;">{{ r.quando }}</span>
+            </div>
+            <p style="margin:0;font-size:14.5px;line-height:1.5;color:#3C4043;white-space:pre-line;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden;">{{ r.texto }}</p>
+          </article>
+        </sc-for>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px;">
+        <button onClick="{{ prev }}" aria-label="Anterior" style="width:48px;height:48px;border:0;background:#0E0E0E;color:#F4EFE6;font-size:22px;cursor:pointer;" style-hover="background:#C9A04E;color:#0E0E0E;">←</button>
+        <button onClick="{{ next }}" aria-label="Próximo" style="width:48px;height:48px;border:0;background:#0E0E0E;color:#F4EFE6;font-size:22px;cursor:pointer;" style-hover="background:#C9A04E;color:#0E0E0E;">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<sc-if value="{{ showProducts }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Produtos" style="background:#0E0E0E;padding:clamp(64px,9vw,112px) clamp(18px,5vw,64px);border-bottom:1px solid #1E1E1E;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:36px;">
+      <div style="max-width:620px;">
+        <p style="font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:22px;color:#C9A04E;margin:0 0 14px;display:flex;align-items:center;gap:14px;"><span data-ball="" style="flex:none;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 27% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.6) 5%,rgba(255,255,255,0) 14%),radial-gradient(circle at 72% 88%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 26%),radial-gradient(circle at 36% 30%,color-mix(in oklab,#1F6B45 72%,white) 0%,#1F6B45 42%,color-mix(in oklab,#1F6B45 45%,black) 88%,color-mix(in oklab,#1F6B45 30%,black) 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 -1px 3px rgba(0,0,0,.35),0 4px 5px -1px rgba(0,0,0,.65),0 1px 2px rgba(0,0,0,.45);position:relative;"><span style="width:23px;height:23px;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFFFFF 0,#F4EFE6 55%,#D9D1C3 100%);box-shadow:inset 0 -1px 2px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-7%,-9%);color:#0E0E0E;font-family:'Barlow',sans-serif;font-style:normal;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;">6</span></span><span>Produtos</span></p>
+        <h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(38px,5.4vw,68px);line-height:.95;margin:0 0 16px;">LEVE O CUIDADO PRA&nbsp;CASA.</h2>
+        <p style="font-size:18px;line-height:1.6;color:#D8CFC2;margin:0;">O corte sai perfeito daqui. Pra manter assim até a próxima visita, leve a linha Authentic Vintage, à venda na&nbsp;barbearia.</p>
+      </div>
+      <a href="https://wa.me/5511986306518?text=Ol%C3%A1!%20Quero%20informa%C3%A7%C3%B5es%20sobre%20os%20produtos%20Authentic%20Vintage%20%C3%A0%20venda%20na%20barbearia." target="_blank" rel="noopener" style="font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#C9A04E;border:1.5px solid #C9A04E;padding:14px 20px;display:inline-flex;align-items:center;gap:10px;" style-hover="background:#C9A04E;color:#0E0E0E;"><span style="flex:none;width:18px;height:18px;background:currentColor;-webkit-mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;"></span><span>Reservar pelo&nbsp;WhatsApp</span></a>
+    </div>
+    <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,{{ prodMin }}),1fr));gap:14px;">
+              <article style="display:flex;flex-direction:column;background:#1A1A1A;border:1px solid rgba(201,160,78,.3);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="border-color:#C9A04E;transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <div style="aspect-ratio:1/1;overflow:hidden;background:#141414;">
+            <img src="assets/prod-cristal.png" alt="Pomada Cristal" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" style-hover="transform:scale(1.05);">
+          </div>
+          <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em;margin:0;line-height:1.1;">Pomada&nbsp;Cristal</h3>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#BFB6A8;flex:1;">Efeito molhado, ótima fixação e brilho. Ação termoativada que previne o ressecamento dos&nbsp;fios.</p>
+            <div style="font-family:'Anton',sans-serif;font-size:22px;color:#C9A04E;letter-spacing:.02em;margin-top:4px;">R$ 30,00</div>
+          </div>
+        </article>
+        <article style="display:flex;flex-direction:column;background:#1A1A1A;border:1px solid rgba(201,160,78,.3);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="border-color:#C9A04E;transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <div style="aspect-ratio:1/1;overflow:hidden;background:#141414;">
+            <img src="assets/prod-teia.png" alt="Pomada Teia" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" style-hover="transform:scale(1.05);">
+          </div>
+          <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em;margin:0;line-height:1.1;">Pomada&nbsp;Teia</h3>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#BFB6A8;flex:1;">Leve e com efeito seco. Perfeita para o dia a&nbsp;dia.</p>
+            <div style="font-family:'Anton',sans-serif;font-size:22px;color:#C9A04E;letter-spacing:.02em;margin-top:4px;">R$ 30,00</div>
+          </div>
+        </article>
+        <article style="display:flex;flex-direction:column;background:#1A1A1A;border:1px solid rgba(201,160,78,.3);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="border-color:#C9A04E;transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <div style="aspect-ratio:1/1;overflow:hidden;background:#141414;">
+            <img src="assets/prod-oleo.png" alt="Óleo para barba e cabelo" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" style-hover="transform:scale(1.05);">
+          </div>
+          <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em;margin:0;line-height:1.1;">Óleo para barba e&nbsp;cabelo</h3>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#BFB6A8;flex:1;">Hidrata, elimina o frizz e dá brilho&nbsp;extra.</p>
+            <div style="font-family:'Anton',sans-serif;font-size:22px;color:#C9A04E;letter-spacing:.02em;margin-top:4px;">R$ 30,00</div>
+          </div>
+        </article>
+        <article style="display:flex;flex-direction:column;background:#1A1A1A;border:1px solid rgba(201,160,78,.3);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="border-color:#C9A04E;transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <div style="aspect-ratio:1/1;overflow:hidden;background:#141414;">
+            <img src="assets/prod-caramelo.png" alt="Pomada Caramelo" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" style-hover="transform:scale(1.05);">
+          </div>
+          <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em;margin:0;line-height:1.1;">Pomada&nbsp;Caramelo</h3>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#BFB6A8;flex:1;">Para cabelo e barba, com ótima fixação e&nbsp;brilho.</p>
+            <div style="font-family:'Anton',sans-serif;font-size:22px;color:#C9A04E;letter-spacing:.02em;margin-top:4px;">R$ 35,00</div>
+          </div>
+        </article>
+        <article style="display:flex;flex-direction:column;background:#1A1A1A;border:1px solid rgba(201,160,78,.3);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="border-color:#C9A04E;transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <div style="aspect-ratio:1/1;overflow:hidden;background:#141414;">
+            <img src="assets/prod-black.png" alt="Pomada Black" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" style-hover="transform:scale(1.05);">
+          </div>
+          <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em;margin:0;line-height:1.1;">Pomada&nbsp;Black</h3>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#BFB6A8;flex:1;">Modela, previne o ressecamento e pigmenta os fios&nbsp;grisalhos.</p>
+            <div style="font-family:'Anton',sans-serif;font-size:22px;color:#C9A04E;letter-spacing:.02em;margin-top:4px;">R$ 35,00</div>
+          </div>
+        </article>
+        <article style="display:flex;flex-direction:column;background:#1A1A1A;border:1px solid rgba(201,160,78,.3);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="border-color:#C9A04E;transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <div style="aspect-ratio:1/1;overflow:hidden;background:#141414;">
+            <img src="assets/prod-balm.png" alt="Balm" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" style-hover="transform:scale(1.05);">
+          </div>
+          <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em;margin:0;line-height:1.1;">Balm</h3>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#BFB6A8;flex:1;">Hidrata, estimula o crescimento dos fios e elimina o&nbsp;frizz.</p>
+            <div style="font-family:'Anton',sans-serif;font-size:22px;color:#C9A04E;letter-spacing:.02em;margin-top:4px;">R$ 35,00</div>
+          </div>
+        </article>
+        <article style="display:flex;flex-direction:column;background:#1A1A1A;border:1px solid rgba(201,160,78,.3);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="border-color:#C9A04E;transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <div style="aspect-ratio:1/1;overflow:hidden;background:#141414;">
+            <img src="assets/prod-locao.png" alt="Loção pós-barba" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" style-hover="transform:scale(1.05);">
+          </div>
+          <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em;margin:0;line-height:1.1;">Loção&nbsp;pós‑barba</h3>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#BFB6A8;flex:1;">Ação antibacteriana e&nbsp;refrescante.</p>
+            <div style="font-family:'Anton',sans-serif;font-size:22px;color:#C9A04E;letter-spacing:.02em;margin-top:4px;">R$ 35,00</div>
+          </div>
+        </article>
+        <article style="display:flex;flex-direction:column;background:#1A1A1A;border:1px solid rgba(201,160,78,.3);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="border-color:#C9A04E;transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <div style="aspect-ratio:1/1;overflow:hidden;background:#141414;">
+            <img src="assets/prod-po.png" alt="Pomada em Pó" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" style-hover="transform:scale(1.05);">
+          </div>
+          <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em;margin:0;line-height:1.1;">Pomada em&nbsp;Pó</h3>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#BFB6A8;flex:1;">Volume e modelagem com controle da&nbsp;oleosidade.</p>
+            <div style="font-family:'Anton',sans-serif;font-size:22px;color:#C9A04E;letter-spacing:.02em;margin-top:4px;">R$ 40,00</div>
+          </div>
+        </article>
+        <article style="display:flex;flex-direction:column;background:#1A1A1A;border:1px solid rgba(201,160,78,.3);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="border-color:#C9A04E;transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <div style="aspect-ratio:1/1;overflow:hidden;background:#141414;">
+            <img src="assets/prod-matte.png" alt="Pomada Matte" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" style-hover="transform:scale(1.05);">
+          </div>
+          <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em;margin:0;line-height:1.1;">Pomada&nbsp;Matte</h3>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#BFB6A8;flex:1;">Penteado com efeito natural e&nbsp;seco.</p>
+            <div style="font-family:'Anton',sans-serif;font-size:22px;color:#C9A04E;letter-spacing:.02em;margin-top:4px;">R$ 40,00</div>
+          </div>
+        </article>
+        <article style="display:flex;flex-direction:column;background:#1A1A1A;border:1px solid rgba(201,160,78,.3);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="border-color:#C9A04E;transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5);">
+          <div style="aspect-ratio:1/1;overflow:hidden;background:#141414;">
+            <img src="assets/prod-shaving.png" alt="Shaving Gel" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" style-hover="transform:scale(1.05);">
+          </div>
+          <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="font-family:'Anton',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em;margin:0;line-height:1.1;">Shaving&nbsp;Gel</h3>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#BFB6A8;flex:1;">Limpa os poros e refresca, facilitando o&nbsp;barbear.</p>
+            <div style="font-family:'Anton',sans-serif;font-size:22px;color:#C9A04E;letter-spacing:.02em;margin-top:4px;">R$ 60,00</div>
+          </div>
+        </article>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<div aria-hidden="true" style="height:22px;background:linear-gradient(180deg,#1E1E1E,#0A0A0A);border-top:1px solid #2A2A2A;border-bottom:1px solid rgba(201,160,78,.3);display:flex;align-items:center;justify-content:space-evenly;padding:0 6%;"><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span><span style="width:7px;height:7px;background:#C9A04E;transform:rotate(45deg);opacity:.85;"></span></div>
+<section data-screen-label="Como agendar" style="background-color:#121313;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);padding:clamp(64px,9vw,120px) clamp(18px,5vw,64px);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <h2 data-reveal="" style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(38px,5.6vw,72px);line-height:.95;margin:0 auto 48px;text-align:center;max-width:18ch;text-wrap:balance;">AGENDAR É MAIS RÁPIDO QUE UMA PARTIDA DE&nbsp;SINUCA.</h2>
+    <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;">
+      <div style="padding:30px 26px;border:1px solid rgba(201,160,78,.45);display:flex;gap:18px;align-items:flex-start;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);border-color:#C9A04E;background:rgba(201,160,78,.06);">
+        <span data-ball="" style="flex:none;width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 27% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.6) 5%,rgba(255,255,255,0) 14%),radial-gradient(circle at 72% 88%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 26%),radial-gradient(circle at 36% 30%,color-mix(in oklab,#E8B10F 72%,white) 0%,#E8B10F 42%,color-mix(in oklab,#E8B10F 45%,black) 88%,color-mix(in oklab,#E8B10F 30%,black) 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 -3px 6px rgba(0,0,0,.35),0 9px 10px -3px rgba(0,0,0,.65),0 2px 3px rgba(0,0,0,.45);position:relative;"><span style="width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFFFFF 0,#F4EFE6 55%,#D9D1C3 100%);box-shadow:inset 0 -1px 3px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-7%,-9%);color:#0E0E0E;font-family:'Barlow',sans-serif;font-style:normal;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;">1</span></span>
+        <p style="margin:6px 0 0;font-size:18px;line-height:1.45;font-weight:600;">Escolha o serviço e confira os&nbsp;valores</p>
+      </div>
+      <div style="padding:30px 26px;border:1px solid rgba(201,160,78,.45);display:flex;gap:18px;align-items:flex-start;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);border-color:#C9A04E;background:rgba(201,160,78,.06);">
+        <span data-ball="" style="flex:none;width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 27% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.6) 5%,rgba(255,255,255,0) 14%),radial-gradient(circle at 72% 88%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 26%),radial-gradient(circle at 36% 30%,color-mix(in oklab,#1E4FA8 72%,white) 0%,#1E4FA8 42%,color-mix(in oklab,#1E4FA8 45%,black) 88%,color-mix(in oklab,#1E4FA8 30%,black) 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 -3px 6px rgba(0,0,0,.35),0 9px 10px -3px rgba(0,0,0,.65),0 2px 3px rgba(0,0,0,.45);position:relative;"><span style="width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFFFFF 0,#F4EFE6 55%,#D9D1C3 100%);box-shadow:inset 0 -1px 3px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-7%,-9%);color:#0E0E0E;font-family:'Barlow',sans-serif;font-style:normal;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;">2</span></span>
+        <p style="margin:6px 0 0;font-size:18px;line-height:1.45;font-weight:600;">Escolha o melhor horário pra&nbsp;você</p>
+      </div>
+      <div style="padding:30px 26px;border:1px solid rgba(201,160,78,.45);display:flex;gap:18px;align-items:flex-start;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;" style-hover="transform:translateY(-5px);border-color:#C9A04E;background:rgba(201,160,78,.06);">
+        <span data-ball="" style="flex:none;width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 27% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.6) 5%,rgba(255,255,255,0) 14%),radial-gradient(circle at 72% 88%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 26%),radial-gradient(circle at 36% 30%,color-mix(in oklab,#C8102E 72%,white) 0%,#C8102E 42%,color-mix(in oklab,#C8102E 45%,black) 88%,color-mix(in oklab,#C8102E 30%,black) 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 -3px 6px rgba(0,0,0,.35),0 9px 10px -3px rgba(0,0,0,.65),0 2px 3px rgba(0,0,0,.45);position:relative;"><span style="width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFFFFF 0,#F4EFE6 55%,#D9D1C3 100%);box-shadow:inset 0 -1px 3px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-7%,-9%);color:#0E0E0E;font-family:'Barlow',sans-serif;font-style:normal;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;">3</span></span>
+        <p style="margin:6px 0 0;font-size:18px;line-height:1.45;font-weight:600;">Chegue, estacione na porta e&nbsp;curta</p>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:40px;">
+      <a href="{{ link }}" style="font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.06em;color:#F4EFE6;padding:18px 58px 18px 28px;background:linear-gradient(90deg,#C8102E calc(100% - 38px),#0E0E0E 0 calc(100% - 30px),#C8102E 0 calc(100% - 24px),#0E0E0E 0 calc(100% - 16px),#C8102E 0);" style-hover="filter:brightness(1.12);color:#F4EFE6;">GARANTIR MEU HORÁRIO&nbsp;→</a>
+    </div>
+  </div>
+</section>
+
+<section id="onde" data-screen-label="Onde estamos" style="scroll-margin-top:70px;background-color:#151210;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32'%3E%3Cg fill='none' stroke='%23A0623F' stroke-opacity='.16'%3E%3Cpath d='M0 .5H64M0 16.5H64M.5 0V16M32.5 16V32'/%3E%3C/g%3E%3C/svg%3E&quot;);padding:clamp(64px,9vw,120px) clamp(18px,5vw,64px) clamp(40px,5vw,64px);">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(28px,5vw,56px);">
+    <div data-reveal="">
+      <p style="font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:22px;color:#C9A04E;margin:0 0 14px;display:flex;align-items:center;gap:14px;"><span data-ball="" style="flex:none;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 27% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.6) 5%,rgba(255,255,255,0) 14%),radial-gradient(circle at 72% 88%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 26%),radial-gradient(circle at 36% 30%,color-mix(in oklab,#141414 72%,white) 0%,#141414 42%,color-mix(in oklab,#141414 45%,black) 88%,color-mix(in oklab,#141414 30%,black) 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 -1px 3px rgba(0,0,0,.35),0 4px 5px -1px rgba(0,0,0,.65),0 1px 2px rgba(0,0,0,.45);position:relative;"><span style="width:23px;height:23px;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFFFFF 0,#F4EFE6 55%,#D9D1C3 100%);box-shadow:inset 0 -1px 2px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-7%,-9%);color:#0E0E0E;font-family:'Barlow',sans-serif;font-style:normal;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;">8</span></span><span>Onde estamos</span></p>
+      <h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(38px,5.4vw,68px);line-height:.95;margin:0 0 26px;text-wrap:balance;">FÁCIL DE CHEGAR. FÁCIL DE&nbsp;ESTACIONAR.</h2>
+      <p style="font-size:18px;line-height:1.55;margin:0 0 14px;color:#D8CFC2;">Na Raimundo Pereira de Magalhães, com estacionamento próprio na frente da&nbsp;barbearia.</p>
+      <p style="font-size:18px;line-height:1.55;margin:0 0 18px;font-weight:600;">Av. Raimundo Pereira de Magalhães, 3114 — Vila Pirituba, São Paulo/SP — CEP&nbsp;05145-100</p>
+      <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#0E0E0E;border-left:0;border:1px solid #C9A04E;margin-bottom:26px;">
+        <span style="flex:none;width:28px;height:28px;background:#C9A04E;-webkit-mask:url(assets/icons/car.svg) center/contain no-repeat;mask:url(assets/icons/car.svg) center/contain no-repeat;"></span>
+        <span style="font-weight:700;font-size:16px;">Estacionamento próprio na frente da&nbsp;barbearia</span>
+      </div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:8px 24px;font-size:16px;margin-bottom:22px;">
+        <span style="color:#BFB6A8;">Terça a quinta</span><span style="font-weight:600;">10h às 20h</span>
+        <span style="color:#BFB6A8;">Sexta</span><span style="font-weight:600;">9h às 20h</span>
+        <span style="color:#BFB6A8;">Sábado</span><span style="font-weight:600;">8h às 18h</span>
+        <span style="color:#BFB6A8;">Domingo e segunda</span><span style="font-weight:600;color:#C8102E;">fechado</span>
+      </div>
+      <p style="font-size:16px;margin:0 0 26px;color:#D8CFC2;"><span style="white-space:nowrap;">Telefone <a href="tel:+551136419888">(11) 3641-9888</a></span> · <span style="white-space:nowrap;">WhatsApp <a href="https://wa.me/5511986306518" target="_blank" rel="noopener">(11) 98630-6518</a></span></p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;">
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Raimundo+Pereira+de+Magalh%C3%A3es,+3114,+Vila+Pirituba,+S%C3%A3o+Paulo" target="_blank" rel="noopener" style="font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#0E0E0E;background:#C9A04E;padding:16px 22px;" style-hover="background:#F5D9A8;color:#0E0E0E;">Como chegar</a>
+        <a href="https://wa.me/5511986306518" target="_blank" rel="noopener" style="font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#C9A04E;border:1.5px solid #C9A04E;padding:16px 22px;display:inline-flex;align-items:center;gap:10px;" style-hover="background:#C9A04E;color:#0E0E0E;"><span style="flex:none;width:18px;height:18px;background:currentColor;-webkit-mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;"></span><span>Chamar no WhatsApp</span></a>
+      </div>
+    </div>
+    <div data-reveal="" style="display:grid;grid-template-rows:auto 260px;gap:10px;">
+      <img src="assets/fachada.jpg" alt="Fachada da Imperium Barber's com estacionamento próprio" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;">
+      <iframe title="Mapa da Imperium Barber's" src="https://www.google.com/maps?q=Av.+Raimundo+Pereira+de+Magalh%C3%A3es,+3114,+Vila+Pirituba,+S%C3%A3o+Paulo+-+SP,+05145-100&amp;output=embed" loading="lazy" style="width:100%;height:100%;border:0;filter:grayscale(.6) contrast(1.05);"></iframe>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="CTA final" style="position:relative;padding:clamp(28px,3vw,44px) clamp(18px,5vw,64px) {{ ctaPadB }};text-align:center;overflow:hidden;">
+  <img src="assets/bolas-cartao.jpg" alt="Bolas de sinuca com o cartão da Imperium Barber's" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 8%;filter:saturate(1.1) contrast(1.08);">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,14,.9) 0%,rgba(14,14,14,.75) 45%,rgba(14,14,14,.15) 75%,rgba(14,14,14,.35) 100%);"></div>
+  <div data-reveal="" style="position:relative;max-width:900px;margin:0 auto;">
+    <h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(42px,7vw,96px);line-height:.93;margin:0 0 20px;text-wrap:balance;">SUA CADEIRA TÁ TE ESPERANDO. <span style="color:#C9A04E;display:block;">A SINUCA&nbsp;TAMBÉM.</span></h2>
+    <p style="font-size:clamp(17px,1.6vw,20px);color:#E4DCCF;margin:0 auto 34px;max-width:640px;">Agende agora e descubra por que nossos clientes dizem que essa é a melhor barbearia do&nbsp;bairro.</p>
+    <a href="{{ link }}" style="display:inline-block;font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.06em;color:#F4EFE6;padding:20px 62px 20px 30px;background:linear-gradient(90deg,#C8102E calc(100% - 40px),#0E0E0E 0 calc(100% - 32px),#C8102E 0 calc(100% - 26px),#0E0E0E 0 calc(100% - 18px),#C8102E 0);box-shadow:0 10px 30px rgba(200,16,46,.4);" style-hover="filter:brightness(1.12);color:#F4EFE6;">GARANTIR MEU HORÁRIO&nbsp;→</a>
+  </div>
+</section>
+
+<div aria-hidden="true" style="height:5px;opacity:.45;background:repeating-linear-gradient(-45deg,#C8102E 0 10px,#F4EFE6 10px 20px,#1E4FA8 20px 30px,#F4EFE6 30px 40px);background-size:56.57px 100%;animation:polemove 2.4s linear infinite;"></div>
+
+<footer style="background:#0A0A0A;padding:56px clamp(18px,5vw,64px) {{ footerPad }};">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:32px;font-size:15px;line-height:1.6;color:#CFC6B8;">
+    <div><img src="assets/logo-inv.png" alt="Imperium Barber's" loading="lazy" style="width:120px;height:auto;"></div>
+    <div>
+      <div style="font-family:'Anton',sans-serif;font-size:18px;color:#F4EFE6;margin-bottom:8px;letter-spacing:.04em;">ENDEREÇO</div>
+      Av. Raimundo Pereira de Magalhães, 3114 — Vila Pirituba, São Paulo/SP — CEP 05145-100
+    </div>
+    <div>
+      <div style="font-family:'Anton',sans-serif;font-size:18px;color:#F4EFE6;margin-bottom:8px;letter-spacing:.04em;">HORÁRIOS</div>
+      Terça a quinta: 10h às 20h<br>Sexta: 9h às 20h<br>Sábado: 8h às 18h<br>Domingo e segunda: fechado
+    </div>
+    <div>
+      <div style="font-family:'Anton',sans-serif;font-size:18px;color:#F4EFE6;margin-bottom:8px;letter-spacing:.04em;">CONTATO</div>
+      <span style="white-space:nowrap;">Telefone <a href="tel:+551136419888">(11) 3641-9888</a></span><br><span style="white-space:nowrap;">WhatsApp <a href="https://wa.me/5511986306518" target="_blank" rel="noopener">(11) 98630-6518</a></span><br>Instagram <a href="https://instagram.com/imperiumbarbers1" target="_blank" rel="noopener">@imperiumbarbers1</a>
+    </div>
+  </div>
+  <div style="max-width:1280px;margin:40px auto 0;padding-top:20px;border-top:1px solid #222;font-size:13px;color:#8F877B;">© Imperium Barber's — Pirituba, São Paulo</div>
+</footer>
+
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <a href="https://wa.me/5511986306518" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp" style="position:fixed;right:24px;bottom:24px;z-index:60;width:62px;height:62px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,.5);" style-hover="transform:scale(1.06);">
+    <span style="width:30px;height:30px;background:#FFFFFF;-webkit-mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;"></span>
+  </a>
+</sc-if>
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(14,14,14,.96);border-top:1px solid rgba(201,160,78,.35);">
+    <a href="{{ link }}" style="flex:1;display:flex;align-items:center;justify-content:center;height:52px;font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.08em;color:#F4EFE6;background:linear-gradient(90deg,#C8102E calc(100% - 30px),#0E0E0E 0 calc(100% - 24px),#C8102E 0 calc(100% - 19px),#0E0E0E 0 calc(100% - 13px),#C8102E 0);padding-right:20px;">AGENDAR</a>
+    <a href="https://wa.me/5511986306518" target="_blank" rel="noopener" aria-label="WhatsApp" style="flex:none;width:52px;height:52px;background:#25D366;display:flex;align-items:center;justify-content:center;">
+      <span style="width:26px;height:26px;background:#FFFFFF;-webkit-mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;mask:url(assets/icons/whatsapp.svg) center/contain no-repeat;"></span>
+    </a>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;linkAgendamento&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://www.trinks.com/barbearia-pirituba-&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Conversão&quot;},&quot;heroFoto&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Salão com barbeiros&quot;,&quot;Turma na sinuca&quot;,&quot;Sinuca em ação&quot;,&quot;Vista baixa da mesa&quot;],&quot;default&quot;:&quot;Salão com barbeiros&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;mostrarProdutos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Seções&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, menuOpen: false };
+  componentDidMount() {
+    this._onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+    const els = document.querySelectorAll('[data-reveal]');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { const t = e.target; if (t._kids) t._kids.forEach(k => { k.style.opacity = '1'; k.style.transform = 'none'; }); else { t.style.opacity = '1'; t.style.transform = 'none'; } io.unobserve(t); setTimeout(() => (t._kids || [t]).forEach(k => { k.style.transition = k._t0 || ''; k.style.transform = ''; }), 1800); }
+      });
+    }, { threshold: 0.12 });
+    const reduce = false;
+    const prep = (el, d, y) => { if (el._t0 === undefined) el._t0 = el.style.transition; el.style.opacity = '0'; el.style.transform = 'translateY(' + y + 'px)'; el.style.transition = 'opacity .8s cubic-bezier(.2,.7,.2,1) ' + d + 'ms, transform .8s cubic-bezier(.2,.7,.2,1) ' + d + 'ms'; };
+    const show = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+    if (!reduce) {
+      const hero = document.querySelector('[data-hero-stagger]');
+      if (hero) { const kids = [...hero.children]; kids.forEach((k, i) => prep(k, 120 + i * 110, 18)); requestAnimationFrame(() => requestAnimationFrame(() => kids.forEach(show))); setTimeout(() => kids.forEach(k => { k.style.transition = k._t0 || ''; k.style.transform = ''; }), 2200); }
+      els.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight) return;
+        const kids = [...el.children];
+        const grid = kids.length > 2 && /grid|flex/.test(getComputedStyle(el).display);
+        if (grid) { el._kids = kids; kids.forEach((k, i) => prep(k, Math.min(i, 8) * 90, 28)); }
+        else prep(el, 0, 24);
+        io.observe(el);
+      });
+    }
+    this._io = io;
+    const balls = document.querySelectorAll('[data-ball]');
+    const bio = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return; const b = e.target; bio.unobserve(b);
+        const num = b.firstElementChild; const i = [...balls].indexOf(b);
+        b.animate([{ transform: 'translateX(-90px) rotate(-540deg)', opacity: 0 }, { transform: 'translateX(6px) rotate(20deg)', opacity: 1, offset: .8 }, { transform: 'translateX(0) rotate(0deg)', opacity: 1 }], { duration: 1300, easing: 'cubic-bezier(.2,.7,.2,1)', delay: 150 }).finished.then(() => {
+          b.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-5px)' }, { transform: 'translateY(0)' }], { duration: 2600 + (i % 3) * 400, iterations: Infinity, easing: 'ease-in-out' });
+          if (num) num.animate([{ transform: 'translate(-7%,-9%) rotate(0deg)' }, { transform: 'translate(-7%,-9%) rotate(360deg)' }], { duration: 5000 + (i % 3) * 1000, iterations: Infinity });
+        });
+        b.addEventListener('mouseenter', () => b.animate([{ transform: 'rotate(0deg) scale(1)' }, { transform: 'rotate(360deg) scale(1.12)' }, { transform: 'rotate(720deg) scale(1)' }], { duration: 900, easing: 'ease-out', composite: 'add' }));
+      });
+    }, { threshold: 0.4 });
+    balls.forEach(b => bio.observe(b));
+    this._bio = bio;
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); this._io && this._io.disconnect(); this._bio && this._bio.disconnect(); }
+  renderVals() {
+    const mobile = this.state.w < 900;
+    const n = mobile ? 10 : 22;
+    const R = (id, u) => (window.__resources && window.__resources[id]) || u;
+    const heroMap = { 'Salão com barbeiros': R('hero-salao2', 'assets/salao2.jpg'), 'Turma na sinuca': R('hero-sinuca-turma', 'assets/sinuca-turma.jpg'), 'Sinuca em ação': R('hero-sinuca-turma2', 'assets/sinuca-turma2.jpg'), 'Vista baixa da mesa': R('hero-mesa-baixa', 'assets/mesa-baixa.jpg') };
+    if (!this.trackRef) this.trackRef = React.createRef();
+    const scroll = (dir) => { const t = this.trackRef.current; if (!t) return; const c = t.firstElementChild; const step = c ? c.getBoundingClientRect().width + 16 : t.clientWidth; const max = t.scrollWidth - t.clientWidth; if (dir > 0 && t.scrollLeft >= max - 4) t.scrollTo({ left: 0 }); else if (dir < 0 && t.scrollLeft <= 4) t.scrollTo({ left: max }); else t.scrollBy({ left: dir * step }); };
+    if (!this.heroRef) this.heroRef = React.createRef();
+    const hs = heroMap[this.props.heroFoto] || heroMap['Salão com barbeiros'];
+    setTimeout(() => { const h = this.heroRef.current; if (h && h.getAttribute('src') !== hs) h.src = hs; }, 0);
+    return {
+      heroRef: this.heroRef,
+      trackRef: this.trackRef,
+      prodMin: this.state.w < 640 ? '150px' : '230px',
+      prev: () => scroll(-1),
+      next: () => scroll(1),
+      cardBasis: this.state.w < 640 ? '86%' : (mobile ? 'calc((100% - 16px) / 2)' : 'calc((100% - 32px) / 3)'),
+      reviews: [
+        { nome: 'Vinícius Alves', ini: 'V', cor: '#795548', meta: '8 avaliações', quando: '7 meses atrás', texto: 'Atendimento fantástico, ambiente estruturado e cheio de boas pessoas! Melhor lugar, com excelentes profissionais! Especialmente o barbeiro Arthur, que além de uma pessoa 10 e um profissional fora da curva!' },
+        { nome: 'Patricia Souza', ini: 'P', cor: '#0B8043', meta: '2 avaliações', quando: 'um ano atrás', texto: 'Eles prestam um ótimo atendimento, excelente profissionais. Atendem super bem as crianças' },
+        { nome: 'Lilian Oliveira', ini: 'L', cor: '#6D4C41', meta: '2 avaliações', quando: '2 anos atrás', texto: 'Olá! Gostaria de deixar um elogio ao barbeiro Mateus. Além do excelente profissionalismo, atendeu meu pedido e foi super atencioso nos detalhes que pedi.\nMuito educado e simpático! Com certeza voltarei mais vezes e indicarei tanto a barbearia (um local organizado, com ótimos profissionais), como o Mateus, o profissional que me atendeu.\n\nSucesso!' },
+        { nome: 'Geovane Lemos', ini: 'G', cor: '#5F6368', meta: '5 avaliações', quando: '5 meses atrás', texto: "Excelente barbearia , muito TOP super recomendo lugar onde me senti a vontade estão d parabéns IMPERIUM Barber's.." },
+        { nome: 'Leandro O.', ini: 'L', cor: '#37474F', meta: 'Local Guide · 147 avaliações', quando: '7 anos atrás', texto: 'Fiz o corte com o Michel que fez um ótimo atendimento, atendeu as expectativas.\n\nRecomendo a barbearia até para quem esteja de passagem, as vezes dependendo do dia da para entrar e conseguir um encaixe para o corte, além de ganhar uma breja cortesia.' }
+        ,{ nome: 'José Arnaldo Pessoa', ini: 'J', cor: '#1E5E3A', meta: '', quando: 'Editado 6 anos atrás', texto: 'Ótimo atendimento, ambiente bem decorado, mimos e bons preços, poderia variar os tipos de músicas. Em outras visitas as músicas também estavam ótimas. Parabéns' }
+        ,{ nome: 'Cláudio Abate', ini: 'C', cor: '#616161', meta: '', quando: 'um ano atrás', texto: 'O corte foi bom e o pessoal é gente boa! Barbearia top, vou mais vezes.' }
+        ,{ nome: 'Rodrigo Luis', ini: 'R', cor: '#00695C', meta: '', quando: '3 anos atrás', texto: 'Excelente lugar, profissionais educados e competentes, Matheus excelente profissional e atencioso, parabéns a equipe toda' }
+        ,{ nome: 'Saymon Pacheco (IS Networking)', ini: 'S', cor: '#E8710A', meta: '', quando: '3 anos atrás', texto: 'Ambiente sensacional, além de ser pertinho de casa.\n\nDe acordo com as minhas experiencias lá, se depender de mim não troco mais de barbearia.' }
+        ,{ nome: 'Fabio Barbosa', ini: 'F', cor: '#C2185B', meta: '', quando: '3 anos atrás', texto: 'Atendimento especial, equipe atenciosa sempre pronta a proporcionar melhor ambiente!' }
+        ,{ nome: 'Marlon Toth', ini: 'M', cor: '#7B1FA2', meta: '', quando: '8 anos atrás', texto: 'Serviço bom, atendimento bom, galera muito gente boa. Você fica à vontade, sai estiloso e ainda tomando uma breja. 👊 😎' }
+      ].map(r => { const t = r.texto; const i = t.lastIndexOf(" "); return Object.assign({}, r, { texto: i > 0 ? t.slice(0, i) + "\u00A0" + t.slice(i + 1) : t, nome: r.nome.replace(/ (\S+)$/, "\u00A0$1") }); }),
+      isMobile: this.state.w < 1100,
+      isDesktop: this.state.w >= 1100,
+      menuOpen: this.state.w < 1100 && this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      link: this.props.linkAgendamento ?? 'https://www.trinks.com/barbearia-pirituba-',
+      heroSrc: heroMap[this.props.heroFoto] || heroMap['Salão com barbeiros'],
+      showProducts: this.props.mostrarProdutos ?? true,
+      lamps: Array.from({ length: n }, (_, i) => ({ d: ((i * 0.73) % 5).toFixed(2) + 's' })),
+      mosaicCols: mobile ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,1fr))',
+      mosaicRow: mobile ? '170px' : '260px',
+      portfolioRow: mobile ? '180px' : '280px',
+      ...(() => { const w = this.state.w; if (w < 760) return { heroShadeA: '100%', heroShadeB: '100%' }; const pad = Math.min(64, Math.max(18, w * 0.05)); const left = Math.max(pad, (w - 1280) / 2 + pad); const h1 = w >= 1100 ? Math.min(66, Math.max(32, w * 0.048)) : Math.min(72, (w - (2 * pad + 4)) / 7.8); const a = Math.round(left + h1 * 7.6 + 40); return { heroShadeA: a + 'px', heroShadeB: Math.min(w, a + 320) + 'px' }; })(),
+      showWordmark: this.state.w >= 640,
+      ctaPadB: this.state.w < 700 ? '460px' : 'clamp(280px,34vw,460px)',
+      showHeaderCta: this.state.w >= 560,
+      logoH: this.state.w < 640 ? '58px' : '80px',
+      ...(() => { const w = this.state.w; if (w >= 1100) return { h1Size: 'clamp(32px,4.8vw,66px)', headSize: 'clamp(22px,2.6vw,34px)' }; const pad = 2 * Math.min(64, Math.max(18, w * 0.05)) + 4; return { h1Size: 'min(72px, calc((100vw - ' + pad + 'px) / 7.8))', headSize: 'min(44px, calc((100vw - ' + pad + 'px) / 7.6))' }; })(),
+      footerPad: this.state.w < 1100 ? '110px' : '40px'
+    };
+  }
+}
+</script>
+</body>
+</html>
